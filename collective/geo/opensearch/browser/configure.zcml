@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="collective.geo.opensearch">
+
+  <include package="plone.app.contentmenu" />
+
+  <browser:page
+      for="*"
+      name="opensearch_rss.xml"
+      class=".rssview.RSSView"
+      template="rssview.pt"
+      allowed_interface=".rssview.IRSSView"
+      permission="zope2.View"
+      layer="..interfaces.ICgoLayer"
+      />
+
+
+  <browser:page
+      for="*"
+      name="opensearch_atom.xml"
+      class=".atomview.AtomView"
+      template="atomview.pt"
+      allowed_interface=".atomview.IAtomView"
+      permission="zope2.View"
+      layer="..interfaces.ICgoLayer"
+      />
+
+
+
+  <!--browser:page
+      for="*"
+      name="opensearch_kml.kml"
+      class=".kmlview.KMLView"
+      template="rssview.pt"
+      allowed_interface=".kmlview.IKMLView"
+      permission="zope2.View"
+      /-->
+
+
+
+</configure>

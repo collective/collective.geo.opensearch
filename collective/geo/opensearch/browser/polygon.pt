@@ -1,0 +1,9 @@
+<georss:where>
+  <gml:Polygon>
+    <gml:exterior>
+      <gml:LinearRing>
+        <gml:posList tal:content="options/coords">COORDS</gml:posList>
+      </gml:LinearRing>
+    </gml:exterior>
+  </gml:Polygon>
+</georss:where>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <rss version="2.0"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone"
+      xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"
+      xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:relevance="http://a9.com/-/opensearch/extensions/relevance/1.0/"
+      xmlns:georss="http://www.georss.org/georss"
+      xmlns:gml="http://www.opengis.net/gml"
+      xmlns:atom="http://www.w3.org/2005/Atom">
+   <channel>
+     <title tal:content="string:${view/feed_title}: ${view/searchterm}">Example.com Search: New York history</title>
+     <link tal:content="string:${here/portal_url}/search?SearchableText=${view/searchterm_url}">http://example.com/search?SearchableText=New+York+history</link>
+     <description i18n:translate="batch_x_items_matching_your_criteria">
+            <span i18n:name="number" tal:omit-tag="" tal:content="view/total_results">234</span> items matching your criteria.
+     </description>
+     <generator tal:content="string:collective.opensearch ${view/version}">
+      collective.opensearch 1.0
+     </generator>
+     <opensearch:totalResults tal:content="view/total_results">4230000</opensearch:totalResults>
+     <opensearch:startIndex tal:content="view/start">21</opensearch:startIndex>
+     <opensearch:itemsPerPage tal:content="view/max_items">10</opensearch:itemsPerPage>
+    <tal:links tal:repeat="link view/links">
+        <atom:link tal:attributes="rel link/rel;
+                            href link/href;
+                            type link/type"
+            tal:condition="link"/>
+    </tal:links>
+     <opensearch:Query role="request" searchTerms="New York History" startIndex="1"
+      tal:attributes="searchTerms view/searchterm; startIndex view/start"/>
+     <item tal:repeat="object view/search_results">
+       <title tal:content="object/title">New York History</title>
+       <link tal:content="object/link">http://www.columbia.edu/cu/lweb/eguids/amerihist/nyc.html</link>
+       <description tal:content="object/summary">
+         ... Harlem.NYC - A virtual tour and information on
+         businesses ...  with historic photos of Columbia's own New York
+         neighborhood ... Internet Resources for the City's History. ...
+       </description>
+       <pubDate tal:content="object/pub_date">Sat, 07 Sep 2002 0:00:01 GMT</pubDate>
+       <guid isPermaLink="true"
+            tal:content="object/get_uid">http://inessential.com/2002/09/01.php#a2</guid>
+       <tal:block tal:repeat="item object/tags">
+             <category domain="http://www.fool.com/cusips"
+                tal:attributes="domain item/scheme"
+                tal:content="item/term">MSFT</category>
+       </tal:block>
+       <author tal:define="author object/author" tal:content="author/name">Creator</author>
+        <relevance:score tal:condition="object/relevance_score"
+                        tal:content="object/relevance_score">0.95</relevance:score>
+       <dc:type tal:content="object/get_type">Type</dc:type>
+       <tal:geo tal:replace="structure object/geo_rss" />
+     </item>
+   </channel>
+ </rss>

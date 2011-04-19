@@ -1,0 +1,5 @@
+<georss:where>
+  <gml:Point>
+    <gml:pos tal:content="options/coords">COORDS</gml:pos>
+  </gml:Point>
+</georss:where>

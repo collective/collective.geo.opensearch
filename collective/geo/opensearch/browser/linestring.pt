@@ -1,4 +1,8 @@
-<georss:where>
+<?xml version="1.0" encoding="utf-8" ?>
+<georss:where
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:georss="http://www.georss.org/georss"
+    xmlns:gml="http://www.opengis.net/gml">
   <gml:LineString>
     <gml:posList tal:content="options/coords">COORDS</gml:posList>
   </gml:LineString>

@@ -24,7 +24,7 @@ def get_geo_rss(context, brain):
         else:
             raise ValueError, "Invalid geometry type"
         if len(coords[0]) == 2 or len(coords[0]) == 3:
-            tuples = ('%f,%f' % (c[1], c[0]) for c in coords)
+            tuples = ('%f %f' % (c[1], c[0]) for c in coords)
         else:
             raise ValueError, "Invalid dimensions"
-        return template(context, coords=' '.join(tuples))
+        return '\n'.join(template(context, coords=' '.join(tuples)).split('\n')[1:])

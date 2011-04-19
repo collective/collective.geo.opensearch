@@ -1,9 +1,15 @@
-<georss:where>
-  <gml:Polygon>
-    <gml:exterior>
-      <gml:LinearRing>
-        <gml:posList tal:content="options/coords">COORDS</gml:posList>
-      </gml:LinearRing>
-    </gml:exterior>
-  </gml:Polygon>
-</georss:where>
+<?xml version="1.0" encoding="UTF-8"?>
+<tal:geo
+    xmlns:georss="http://www.georss.org/georss"
+    xmlns:gml="http://www.opengis.net/gml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal">
+    <georss:where>
+      <gml:Polygon>
+        <gml:exterior>
+          <gml:LinearRing>
+            <gml:posList tal:content="options/coords">COORDS</gml:posList>
+          </gml:LinearRing>
+        </gml:exterior>
+      </gml:Polygon>
+    </georss:where>
+</tal:geo>

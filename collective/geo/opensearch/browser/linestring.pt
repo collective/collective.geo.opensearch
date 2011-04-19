@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<georss:where
-    xmlns:tal="http://xml.zope.org/namespaces/tal"
+<tal:geo
     xmlns:georss="http://www.georss.org/georss"
-    xmlns:gml="http://www.opengis.net/gml">
-  <gml:LineString>
-    <gml:posList tal:content="options/coords">COORDS</gml:posList>
-  </gml:LineString>
-</georss:where>
+    xmlns:gml="http://www.opengis.net/gml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal">
+    <georss:where>
+      <gml:LineString>
+        <gml:posList tal:content="options/coords">COORDS</gml:posList>
+      </gml:LineString>
+    </georss:where>
+</tal:geo>

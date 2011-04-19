@@ -30,14 +30,13 @@
 
 
 
-  <!--browser:page
+  <browser:page
       for="*"
       name="opensearch_kml.kml"
       class=".kmlview.KMLView"
-      template="rssview.pt"
       allowed_interface=".kmlview.IKMLView"
       permission="zope2.View"
-      /-->
+      />
 
 
 

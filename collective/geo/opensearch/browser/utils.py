@@ -16,11 +16,17 @@ def get_geo_rss(context, brain):
         elif brain.zgeo_geometry['type'] == 'LineString':
             coords = brain.zgeo_geometry['coordinates']
             template = ViewPageTemplateFile('linestring.pt')
-
-        #elif brain.zgeo_geometry['type'] == 'Envelope':
-        # A bounding box defines a rectangular region.
-        # It is often used to define the extents of a map or define a
-        # rough area of interest. A GML box is called an Envelope.
+        elif brain.zgeo_geometry['type'] in ['MultiPoint',
+                            'MultiLineString', 'MultiPolygon']
+            pass
+            #XXX do something resonable here, maybe just return the bounding box
+            # or a polygon that outlines all coordinates
+            # shapely.geometry.MultiLineString(brain.zgeo_geometry['coordinates']).convex_hull.to_wkt()
+            # .bounds or .envelope
+            # A bounding box defines a rectangular region.
+            # It is often used to define the extents of a map or define a
+            # rough area of interest. A GML box is called an Envelope.
+            return
         else:
             raise ValueError, "Invalid geometry type"
         if len(coords[0]) == 2 or len(coords[0]) == 3:

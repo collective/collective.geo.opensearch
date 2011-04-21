@@ -42,8 +42,8 @@ def get_geo_rss(context, brain):
                             context, coords=' '.join(tuples)
                         ).split('\n')[1:])
         elif len(coords[0]) == 4 and len(coords) == 1:
-            upper_corner=coords[0][0:2]
-            lower_corner=coords[0][2:4]
+            upper_corner=coords[0][2:4]
+            lower_corner=coords[0][0:2]
             return '\n'.join(template(
                             context,
                             upper='%f %f' % upper_corner,

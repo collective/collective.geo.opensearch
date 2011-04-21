@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tal:geo
+    xmlns:georss="http://www.georss.org/georss"
+    xmlns:gml="http://www.opengis.net/gml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal">
+    <georss:where>
+        <gml:Envelope>
+          <gml:lowerCorner tal:content="options/lower">42.943 -71.032</gml:lowerCorner>
+          <gml:upperCorner tal:content="options/upper">43.039 -69.856</gml:upperCorner>
+        </gml:Envelope>
+    </georss:where>
+</tal:geo>

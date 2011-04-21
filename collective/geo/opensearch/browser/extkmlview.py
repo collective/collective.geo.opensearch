@@ -101,9 +101,10 @@ class ExtKMLView(BrowserView):
         for entry in self.results.entries:
             try:
                 geo = parse_geo_rss(entry)
-                g = geom.asShape(geo)
-                entry['kml_coordinates'] = coords_to_kml(geo)
-                yield entry
+                if geo:
+                    g = geom.asShape(geo)
+                    entry['kml_coordinates'] = coords_to_kml(geo)
+                    yield entry
             except ValueError:
                 pass
 

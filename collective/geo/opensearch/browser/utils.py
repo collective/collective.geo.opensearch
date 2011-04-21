@@ -53,12 +53,12 @@ def parse_geo_rss(entry):
             # Point
             return _parse_georss_point(entry['gml_pos'])
         elif (('gml_polygon' in entry) and ('gml_exterior' in entry)
-                and ('gml_linearring' in entry) and ('gml_polslist' in entry)):
+                and ('gml_linearring' in entry) and ('gml_poslist' in entry)):
             # Polygon
-            return _parse_georss_polygon(entry['gml_polslist'])
-        elif ('gml_linestring' in entry) and ('gml_polslist' in entry):
+            return _parse_georss_polygon(entry['gml_poslist'])
+        elif ('gml_linestring' in entry) and ('gml_poslist' in entry):
             # LineString
-            return _parse_georss_line(entry['gml_polslist'])
+            return _parse_georss_line(entry['gml_poslist'])
     # some versions of feedparser do not put the namespace in front :(
     elif 'where' in entry:
         if 'envelope' in entry:
@@ -68,12 +68,12 @@ def parse_geo_rss(entry):
             # Point
             return _parse_georss_point(entry['pos'])
         elif (('polygon' in entry) and ('exterior' in entry)
-                and ('linearring' in entry) and ('polslist' in entry)):
+                and ('linearring' in entry) and ('poslist' in entry)):
             # Polygon
-            return _parse_georss_polygon(entry['polslist'])
-        elif ('linestring' in entry) and ('polslist' in entry):
+            return _parse_georss_polygon(entry['poslist'])
+        elif ('linestring' in entry) and ('poslist' in entry):
             # LineString
-            return _parse_georss_line(entry['polslist'])
+            return _parse_georss_line(entry['poslist'])
 
 
 def get_geo_rss(context, brain):

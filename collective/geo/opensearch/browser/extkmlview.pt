@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:tal="http://xml.zope.org/namespaces/tal">
+    <atom:link rel="alternate"
+        tal:attributes="href view/get_link; type view/get_type" />
+    <Document>
+     <name tal:content="view/__name__">NYCHistory.kml</name>
+     <open>1</open>
+     <Placemark tal:repeat="entry view/entries">
+       <name tal:content="entry/title">New York History</name>
+       <description tal:content="entry/description">Some Descriptive text.</description>
+       <atom:link tal:content="entry/link">http://www.columbia.edu/cu/lweb/eguids/amerihist/nyc.html</atom:link>
+       <LineString tal:replace="structure entry/kml_coordinates">
+         <coordinates>
+           -73.9972,40.73763,0 -73.99167,40.73519,0 -73.99035,40.737015,0
+           -73.98914,40.73643,0 -73.990431,40.734640,0 -73.991504,40.731617,0
+         </coordinates>
+       </LineString>
+     </Placemark>
+    </Document>
+</kml>

@@ -38,6 +38,13 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      for="Products.ATContentTypes.interfaces.link.IATLink"
+      name="opensearch_link.kml"
+      class=".extkmlview.ExtKMLView"
+      allowed_interface=".extkmlview.IExtKMLView"
+      permission="zope2.View"
+      />
 
 
 </configure>

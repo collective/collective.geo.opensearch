@@ -20,18 +20,20 @@ from zope.interface import implements, Interface
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from utils import parse_geo_rss
-#from collective.geo.kml.browser.kmldocument import coords_to_kml
+
 
 def coords_to_kml(geom):
     gtype = geom['type']
+    coordlist = []
+    mg_tmpl = '%s'
     if gtype == 'Point':
-        coords = (geom['coordinates'],)
+        coordlist.append( (geom['coordinates'],))
         tmpl = '''
             <Point>
               <coordinates>%s</coordinates>
             </Point>'''
     elif gtype == 'Polygon':
-        coords = geom['coordinates'][0]
+        coordlist = geom['coordinates']
         tmpl = '''
             <Polygon>
               <outerBoundaryIs>
@@ -43,23 +45,43 @@ def coords_to_kml(geom):
               </outerBoundaryIs>
             </Polygon>'''
     elif gtype == 'LineString':
-        coords = geom['coordinates']
+        coordlist.append(geom['coordinates'])
         tmpl = '''
             <LineString>
               <coordinates>
                 %s
               </coordinates>
             </LineString>'''
+    elif gtype == 'MultiPolygon':
+        coordlist = geom['coordinates']
+        mg_tmpl = '''
+        <MultiGeometry>
+            %s
+        </MultiGeometry>'''
+
+        tmpl = '''
+            <Polygon>
+              <outerBoundaryIs>
+                <LinearRing>
+                  <coordinates>
+                    %s
+                  </coordinates>
+                </LinearRing>
+              </outerBoundaryIs>
+            </Polygon>'''
+
     else:
         raise ValueError, "Invalid geometry type"
-
-    if len(coords[0]) == 2:
-        tuples = ('%f,%f,0.0' % tuple(c) for c in coords)
-    elif len(coords[0]) == 3:
-        tuples = ('%f,%f,%f' % tuple(c) for c in coords)
-    else:
-        raise ValueError, "Invalid dimensions"
-    return tmpl % ' '.join(tuples)
+    templates = []
+    for coords in coordlist:
+        if len(coords[0]) == 2:
+            tuples = ('%f,%f,0.0' % tuple(c) for c in coords)
+        elif len(coords[0]) == 3:
+            tuples = ('%f,%f,%f' % tuple(c) for c in coords)
+        else:
+            raise ValueError, "Invalid dimensions"
+        templates.append(tmpl % ' '.join(tuples))
+    return mg_tmpl % '\n'.join(templates)
 
 
 class IExtKMLView(Interface):

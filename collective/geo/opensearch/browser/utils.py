@@ -10,24 +10,42 @@ logger = logging.getLogger('collective.geo.opensearch')
 def _parse_georss_box(value):
     try:
         lat0, lon0, lat1, lon1 = value.replace(',', ' ').split()
+        # lat0, lon0
+        # lowerLeft - the lower left coordinate. The latitude of this
+        # point must be below the latitude of the upper right coordinate.
+        # lat1, lon1
+        # upperRight - the upper right coordinate. The latitude of this point
+        # must be above the latitude of the lower left coordinate.
+
         if ((abs(int(float(lat0))) == 90) and (abs(int(float(lon0))) == 180) and
             (abs(int(float(lat1))) == 90) and (abs(int(float(lon1))) == 180)):
+            # a bounding box comprising everything will not give us
+            # additional information so we skip it
             return
         else:
-            #return {'type': 'LineString', 'coordinates': (
-                                    #(float(lon1), float(lat1)),
-                                    #(float(lon1), float(lat0)),
-                                    #(float(lon0), float(lat0)),
-                                    #(float(lon0), float(lat1)),
-                                    #(float(lon0), float(lat0)),
-                    #)}
-            return {'type': 'Polygon', 'coordinates': ((
-                                    (float(lon0), float(lat0)),
-                                    (float(lon0), float(lat1)),
-                                    (float(lon1), float(lat1)),
-                                    (float(lon1), float(lat0)),
-                                    (float(lon0), float(lat0)),
-                    ),)}
+            if float(lon0) < float(lon1):
+                return {'type': 'Polygon', 'coordinates': ((
+                                        (float(lon0), float(lat0)),
+                                        (float(lon0), float(lat1)),
+                                        (float(lon1), float(lat1)),
+                                        (float(lon1), float(lat0)),
+                                        (float(lon0), float(lat0)),
+                        ),)}
+            else:
+                # the box crosses the dateline
+                return {'type': 'MultiPolygon', 'coordinates': (
+                                        ((float(lon0), float(lat0)),
+                                        (float(lon0), float(lat1)),
+                                        (-180.0, float(lat1)),
+                                        (-180.0, float(lat0)),
+                                        (float(lon0), float(lat0)),),
+                                        ((180.0, float(lat0)),
+                                        (180.0, float(lat1)),
+                                        (float(lon1), float(lat1)),
+                                        (float(lon1), float(lat0)),
+                                        (180.0, float(lat0)),),
+                                    )
+                        }
     except Exception, e:
        logger.info('exeption raised in _parse_georss_box: %s' % e)
 

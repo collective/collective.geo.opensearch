@@ -6,10 +6,11 @@
         tal:attributes="href view/get_link; type view/get_type" />
     <Document>
      <name tal:content="view/__name__">NYCHistory.kml</name>
-     <open>1</open>
+     <visibility>1</visibility>
+     <open>0</open>
      <Placemark tal:repeat="entry view/entries">
        <name tal:content="entry/title">New York History</name>
-       <description tal:content="entry/description">Some Descriptive text.</description>
+       <description tal:content="structure entry/get_description">Some Descriptive text.</description>
        <atom:link tal:content="entry/link">http://www.columbia.edu/cu/lweb/eguids/amerihist/nyc.html</atom:link>
        <LineString tal:replace="structure entry/kml_coordinates">
          <coordinates>

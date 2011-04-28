@@ -15,12 +15,15 @@
 
 import urllib
 import feedparser
+import cgi
+import logging
 import shapely.geometry as geom
 from zope.interface import implements, Interface
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from utils import parse_geo_rss
 
+logger = logging.getLogger('collective.geo.opensearch')
 
 def coords_to_kml(geom):
     gtype = geom['type']
@@ -55,10 +58,9 @@ def coords_to_kml(geom):
     elif gtype == 'MultiPolygon':
         coordlist = geom['coordinates']
         mg_tmpl = '''
-        <MultiGeometry>
-            %s
-        </MultiGeometry>'''
-
+            <MultiGeometry>
+                %s
+            </MultiGeometry>'''
         tmpl = '''
             <Polygon>
               <outerBoundaryIs>
@@ -104,6 +106,30 @@ class ExtKMLView(BrowserView):
     def searchterm(self):
         return self.request.form.get('SearchableText', '')
 
+    def cdata_desc(self, entry):
+        sd = entry.get('summary_detail')
+        if sd:
+            if sd['type'] in ['text/html', 'application/xhtml+xml']:
+                return '<![CDATA[ %s ]]>' % sd['value']
+            elif sd['type'] == 'text/plain':
+                return cgi.escape(sd['value'])
+            else:
+                logger.debug('unrecognised summary type: %s' % sd['type'])
+                return cgi.escape(sd['value'])
+        elif entry.get['content']:
+            content = entry['content'][0]
+            if content['type'] in ['text/html', 'application/xhtml+xml']:
+                return '<![CDATA[ %s ]]>' % content['value']
+
+            elif content['type'] == 'text/plain':
+                return cgi.escape(content['value'])
+            else:
+                logger.debug('unrecognised summary type: %s' % content['type'])
+                return cgi.escape(content['value'])
+        else:
+            logger.info('no description found for entry')
+
+
     def entries(self):
         for entry in self.results.entries:
             try:
@@ -111,6 +137,7 @@ class ExtKMLView(BrowserView):
                 if geo:
                     g = geom.asShape(geo)
                     entry['kml_coordinates'] = coords_to_kml(geo)
+                    entry['get_description'] = self.cdata_desc(entry)
                     yield entry
             except ValueError:
                 pass

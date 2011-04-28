@@ -16,7 +16,6 @@ def _parse_georss_box(value):
         # lat1, lon1
         # upperRight - the upper right coordinate. The latitude of this point
         # must be above the latitude of the lower left coordinate.
-
         if ((abs(int(float(lat0))) == 90) and (abs(int(float(lon0))) == 180) and
             (abs(int(float(lat1))) == 90) and (abs(int(float(lon1))) == 180)):
             # a bounding box comprising everything will not give us

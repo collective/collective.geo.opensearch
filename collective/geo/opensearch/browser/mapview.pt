@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="collective.geo.file">
+<head>
+    <metal:javascript_head fill-slot="javascript_head_slot">
+      <metal:use use-macro="context/@@collectivegeo-macros/openlayers" />
+    </metal:javascript_head>
+</head>
+<body>
+  <metal:content-core fill-slot="content-core">
+    <metal:content-core define-macro="content-core">
+        <div id="content-core" i18n:domain="plone">
+                <form name="opensearchform"
+                      action="."
+                      class="searchPage"
+                      tal:condition="view/has_searchterm"
+                      tal:attributes="action string:${here/absolute_url}/@@feed_map_view.html">
+                    <input class="searchPage"
+                           name="SearchableText"
+                           type="text"
+                           size="25"
+                           title="Search Site"
+                           i18n:attributes="title title_search_title;"
+                           tal:attributes="value view/searchterm;"
+                           />
+                    <input class="searchPage searchButton"
+                           type="submit"
+                           value="Search"
+                           i18n:attributes="value label_search;"/>
+                </form>
+                <div id="kmlfilemap" style="height:450px; width: 800px">
+                    <metal:use use-macro="context/@@collectivegeo-macros/map-widget"  />
+                    <script type="text/javascript"
+                        src="++resource++geo.kml.javascripts/kml_openlayers.js"></script>
+                </div>
+                <a tal:attributes="href view/download_url"> Download KML </a>
+                <br/>
+                <div tal:replace="structure view/display_results" > Results html snippet</div>
+            </div>
+    </metal:content-core>
+  </metal:content-core>
+</body>
+</html>

@@ -22,6 +22,7 @@ from zope.interface import implements, Interface
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from utils import parse_geo_rss
+from collective.opensearch.browser.utils import fetch_url
 
 logger = logging.getLogger('collective.geo.opensearch')
 
@@ -107,27 +108,58 @@ class ExtKMLView(BrowserView):
         return self.request.form.get('SearchableText', '')
 
     def cdata_desc(self, entry):
+        def html_desc(description, entry):
+            desc = u'<p>' + cgi.escape(description) +u'</p>'
+            links = entry.get('links',[])
+            alt_links = []
+            for link in links:
+                alt_link = {}
+                if link.get('rel') == 'alternate':
+                    if link.get('title'):
+                        alt_link['title'] = link['title']
+                    elif link.get('type') !='text/html':
+                        # text/html is the default assigned by
+                        # feedparser so this is meaningless
+                        alt_link['title'] = link['type']
+                    elif link.get('href'):
+                        alt_link['title'] = link['href']
+                    else:
+                        continue
+                    if link.get('href'):
+                        alt_link['href'] = link['href']
+                    else:
+                        continue
+                alt_links.append(alt_link)
+            if alt_links:
+                desc +=u'<p><ul>'
+                for link in alt_links:
+                    desc += u'<li><a href="%(href)s">%(title)s</a></li>' % link
+                desc +=u'</ul></p>'
+            return desc
+
         sd = entry.get('summary_detail')
         if sd:
             if sd['type'] in ['text/html', 'application/xhtml+xml']:
-                return '<![CDATA[ %s ]]>' % sd['value']
+                summary =sd['value']
             elif sd['type'] == 'text/plain':
-                return cgi.escape(sd['value'])
+                summary = html_desc(sd['value'], entry)
             else:
                 logger.debug('unrecognised summary type: %s' % sd['type'])
-                return cgi.escape(sd['value'])
+                summary = cgi.escape(sd['value'], entry)
         elif entry.get['content']:
             content = entry['content'][0]
             if content['type'] in ['text/html', 'application/xhtml+xml']:
-                return '<![CDATA[ %s ]]>' % content['value']
+                summary = content['value']
 
             elif content['type'] == 'text/plain':
-                return cgi.escape(content['value'])
+                summary = html_desc(content['value'], entry)
             else:
                 logger.debug('unrecognised summary type: %s' % content['type'])
-                return cgi.escape(content['value'])
+                summary = cgi.escape(content['value'])
         else:
             logger.info('no description found for entry')
+            summary =  html_desc(u'No Description', entry)
+        return  '<![CDATA[ %s ]]>' % summary
 
 
     def entries(self):
@@ -155,8 +187,11 @@ class ExtKMLView(BrowserView):
         if not search_term:
                 return []
         qurl = url.replace('%7BsearchTerms%7D',search_term)
-        self.results= feedparser.parse(qurl)
-
+        rd = fetch_url(qurl)
+        self.results = rd['result']
         self.request.RESPONSE.setHeader('Content-Type',
             '%s; charset=utf-8' % self._type)
-        return self.render()
+        if rd['type'] == 'feed':
+            return self.render()
+        elif rd['type'] == 'kml':
+            return self.results

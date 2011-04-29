@@ -5,7 +5,7 @@ from collective.geo.mapwidget.maplayers import MapLayer
 
 class FeedMapLayer(MapLayer):
     """
-    a layer for a KML File.
+    a layer for a Feed
     """
 
     def __init__(self, context, request):
@@ -18,7 +18,7 @@ class FeedMapLayer(MapLayer):
         context_url = self.context.absolute_url()
         if not context_url.endswith('/'):
             context_url += '/'
-        context_url += '@@opensearch_kml.kml?SearchableText=' + urllib.quote_plus(
+        context_url += '@@opensearch_link.kml?SearchableText=' + urllib.quote_plus(
                 self.request.form.get('SearchableText',''))
         return"""
         function() { return new OpenLayers.Layer.GML('%s', '%s',
@@ -30,7 +30,7 @@ class FeedMapLayer(MapLayer):
             });}
         """ % (self.context.Title().decode('utf-8', 'ignore'
                                 ).encode('ascii', 'xmlcharrefreplace'
-                                ).replace("'", ""), context_url)
+                                ).replace("'", "&apos;"), context_url)
 class KMLMapLayers(MapLayers):
     '''
     create all layers for this view.

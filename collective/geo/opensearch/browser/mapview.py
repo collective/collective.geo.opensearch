@@ -38,7 +38,7 @@ class MapView(oslinkview.OsLinkView):
     implements(IMapView)
 
     def download_url(self):
-        return self.context.absolute_url() + '/@@opensearch_kml.kml?' + urllib.quote_plus(self.searchterm)
+        return self.context.absolute_url() + '/@@opensearch_link.kml?' + urllib.quote_plus(self.searchterm)
 
 
 

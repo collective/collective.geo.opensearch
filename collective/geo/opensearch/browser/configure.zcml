@@ -7,7 +7,8 @@
 
   <include package="plone.app.contentmenu" />
 
-  <browser:page
+
+<browser:page
       for="Products.ATContentTypes.interfaces.link.IATLink"
       name="feed_map_view.html"
       class=".mapview.MapView"
@@ -16,14 +17,14 @@
       permission="zope2.View"
       />
 
+
   <adapter
-      for=".mapview.IMapView
+      for="collective.opensearch.browser.oslinkview.IOsLinkView
            zope.interface.Interface
            zope.interface.Interface
            zope.interface.Interface"
       factory=".maplayers.KMLMapLayers"
       />
-
 
 
 

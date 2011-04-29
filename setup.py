@@ -26,6 +26,7 @@ setup(name='collective.geo.opensearch',
           'setuptools',
           # -*- Extra requirements: -*-
           'collective.opensearch',
+          'collective.geo.kml',
       ],
       entry_points="""
       # -*- Entry points: -*-

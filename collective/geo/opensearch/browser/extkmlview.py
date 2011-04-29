@@ -103,6 +103,10 @@ class ExtKMLView(BrowserView):
     _type="text/xml"
     results=[]
 
+    def has_searchterm(self):
+        url = self.context.getRemoteUrl()
+        return url.find('%7BsearchTerms%7D') > 0
+
     @property
     def searchterm(self):
         return self.request.form.get('SearchableText', '')
@@ -184,8 +188,9 @@ class ExtKMLView(BrowserView):
     def __call__(self):
         url = self.context.getRemoteUrl()
         search_term = urllib.quote_plus(self.searchterm)
-        if not search_term:
-                return []
+        if self.has_searchterm():
+            if not search_term:
+                    return []
         qurl = url.replace('%7BsearchTerms%7D',search_term)
         rd = fetch_url(qurl)
         self.results = rd['result']

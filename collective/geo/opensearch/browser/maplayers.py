@@ -40,3 +40,18 @@ class KMLMapLayers(MapLayers):
         layers = super(KMLMapLayers, self).layers()
         layers.append(FeedMapLayer(self.context, self.request))
         return layers
+
+
+class KMLFolderMapLayers(MapLayers):
+    '''
+    create all layers for this view.
+    '''
+
+    def layers(self):
+        layers = super(KMLFolderMapLayers, self).layers()
+        type_filter = {"portal_type" : ["Link"]}
+        for r in self.context.getFolderContents(contentFilter=type_filter):
+            obj = r.getObject()
+            if obj.getLayout() == 'feed_map_view.html':
+                layers.append(FeedMapLayer(obj, self.request))
+        return layers

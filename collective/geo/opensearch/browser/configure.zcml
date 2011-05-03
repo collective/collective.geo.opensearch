@@ -8,7 +8,47 @@
   <include package="plone.app.contentmenu" />
 
 
-<browser:page
+  <browser:menuItem
+      title="Open Search Map View"
+      for="plone.app.folder.folder.IATUnifiedFolder"
+      menu="plone_displayviews"
+      action="osmapfolder_view.html"
+      description="View all open search links inside this folder as a meta search and display on a map."
+      />
+
+
+
+
+  <browser:page
+      for="plone.app.folder.folder.IATUnifiedFolder"
+      name="osmapfolder_view.html"
+      class=".folderview.FolderView"
+      template="folderview.pt"
+      allowed_interface=".folderview.IFolderView"
+      permission="zope2.View"
+      />
+
+
+  <adapter
+      for=".folderview.IFolderView
+           zope.interface.Interface
+           zope.interface.Interface
+           zope.interface.Interface"
+      factory=".maplayers.KMLFolderMapLayers"
+      />
+
+
+
+  <browser:menuItem
+      title="Open Search Map View"
+      for="Products.ATContentTypes.interfaces.link.IATLink"
+      menu="plone_displayviews"
+      action="feed_map_view.html"
+      description="Set OpenSearch map view."
+      />
+
+
+  <browser:page
       for="Products.ATContentTypes.interfaces.link.IATLink"
       name="feed_map_view.html"
       class=".mapview.MapView"

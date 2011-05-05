@@ -18,8 +18,8 @@ class FeedMapLayer(MapLayer):
         context_url = self.context.absolute_url()
         if not context_url.endswith('/'):
             context_url += '/'
-        context_url += '@@opensearch_link.kml?SearchableText=' + urllib.quote_plus(
-                self.request.form.get('SearchableText',''))
+        context_url += '@@opensearch_link.kml?searchTerms=' + urllib.quote_plus(
+                self.request.form.get('searchTerms',''))
         return"""
         function() { return new OpenLayers.Layer.GML('%s', '%s',
             { format: OpenLayers.Format.KML,

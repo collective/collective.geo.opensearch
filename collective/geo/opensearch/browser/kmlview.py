@@ -22,4 +22,5 @@ class KMLView(KMLBaseDocument):
     def features(self):
         search_results = search.get_results(self.context, self.request)
         for brain in search_results:
-            yield BrainPlacemark(brain, self.request, self)
+            if brain.zgeo_geometry:
+                yield BrainPlacemark(brain, self.request, self)

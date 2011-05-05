@@ -16,7 +16,7 @@
                   class="searchPage"
                   tal:attributes="action string:${here/absolute_url}/@@osmapfolder_view.html">
                 <input class="searchPage"
-                       name="SearchableText"
+                       name="searchTerms"
                        type="text"
                        size="25"
                        title="Search Site"

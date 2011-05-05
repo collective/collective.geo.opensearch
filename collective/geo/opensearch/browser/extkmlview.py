@@ -22,7 +22,7 @@ from zope.interface import implements, Interface
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from utils import parse_geo_rss
-from collective.opensearch.browser.utils import fetch_url
+from collective.opensearch.browser.utils import fetch_url, substitute_parameters
 
 logger = logging.getLogger('collective.geo.opensearch')
 
@@ -109,7 +109,7 @@ class ExtKMLView(BrowserView):
 
     @property
     def searchterm(self):
-        return self.request.form.get('SearchableText', '')
+        return self.request.form.get('searchTerms', '')
 
     def cdata_desc(self, entry):
         def html_desc(description, entry):
@@ -191,7 +191,7 @@ class ExtKMLView(BrowserView):
         if self.has_searchterm():
             if not search_term:
                     return []
-        qurl = url.replace('%7BsearchTerms%7D',search_term)
+        qurl = substitute_parameters(url, self.request.form)
         rd = fetch_url(qurl)
         self.results = rd['result']
         self.request.RESPONSE.setHeader('Content-Type',

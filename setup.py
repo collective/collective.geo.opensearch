@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1'
+version = '0.2'
 
 setup(name='collective.geo.opensearch',
       version=version,
@@ -12,6 +12,7 @@ setup(name='collective.geo.opensearch',
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
+        "Topic :: Software Development :: Libraries :: Python Modules :: Scientific/Engineering :: GIS",
         ],
       keywords='',
       author='',

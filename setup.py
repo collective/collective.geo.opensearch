@@ -12,7 +12,6 @@ setup(name='collective.geo.opensearch',
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules :: Scientific/Engineering :: GIS",
         ],
       keywords='',
       author='',

@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.2'
+version = '0.3'
 
 setup(name='collective.geo.opensearch',
       version=version,
@@ -14,9 +14,9 @@ setup(name='collective.geo.opensearch',
         "Programming Language :: Python",
         ],
       keywords='',
-      author='',
-      author_email='',
-      url='http://svn.plone.org/svn/collective/',
+      author='Christian Ledermann',
+      author_email='christian.ledermann@gmail.com',
+      url='http://plone.org/products/collective.geo.opensearch',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['collective', 'collective.geo'],

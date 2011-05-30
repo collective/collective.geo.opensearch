@@ -99,8 +99,8 @@ class ExtKMLView(BrowserView):
     """
     implements(IExtKMLView)
     render = ViewPageTemplateFile('extkmlview.pt')
-    #_type="application/vnd.google-earth.kml+xml"
-    _type="text/xml"
+    _type="application/vnd.google-earth.kml+xml"
+    #_type="text/xml"
     results=[]
 
     def has_searchterm(self):

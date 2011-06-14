@@ -137,7 +137,8 @@ class ExtKMLView(BrowserView):
             if alt_links:
                 desc +=u'<p><ul>'
                 for link in alt_links:
-                    desc += u'<li><a href="%(href)s">%(title)s</a></li>' % link
+                    if link:
+                        desc += u'<li><a href="%(href)s">%(title)s</a></li>' % link
                 desc +=u'</ul></p>'
             return desc
 
@@ -150,7 +151,7 @@ class ExtKMLView(BrowserView):
             else:
                 logger.debug('unrecognised summary type: %s' % sd['type'])
                 summary = cgi.escape(sd['value'], entry)
-        elif entry.get['content']:
+        elif entry.get('content'):
             content = entry['content'][0]
             if content['type'] in ['text/html', 'application/xhtml+xml']:
                 summary = content['value']

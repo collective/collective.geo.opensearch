@@ -34,7 +34,7 @@
                     <script type="text/javascript"
                         src="++resource++geo.kml.javascripts/kml_openlayers.js"></script>
                 </div>
-                <a tal:attributes="href view/download_url"> Download KML </a>
+                <a tal:attributes="href view/download_url" i18n:translate=""> Download KML </a>
                 <br/>
                 <div tal:replace="structure view/display_results" > Results html snippet</div>
             </div>

@@ -1,7 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="collective.opensearch">
+      i18n:domain="collective.geo.opensearch">
 <head>
     <metal:javascript_head fill-slot="javascript_head_slot">
       <metal:use use-macro="context/@@collectivegeo-macros/openlayers" />
@@ -39,13 +42,13 @@
                 <tal:loop tal:repeat="search view/get_searches">
                    <dt tal:content="search/Title"
                         tal:attributes="id string:fieldsetlegend-${search/id}">
-                        Search title</dt>
+                        <tal:comment replace="nothing">Search title</tal:comment> </dt>
                     <dd tal:attributes="id string:fieldset-${search/id}">
-                       <div tal:content="search/Description"> Description </div>
+                       <div tal:content="search/Description"> <tal:comment replace="nothing">Description</tal:comment> </div>
                        <div id="searchresults"
-                        tal:attributes="id string:searchresults-${search/id}">
+                        tal:attributes="id string:searchresults-${search/id}" i18n:translate="">
                         Loading please wait.
-                        <img src="/spinner.gif" alt="loading"
+                        <img src="/spinner.gif" alt="loading" i18n:attributes="alt"
                             tal:attributes="src string:${here/portal_url}/spinner.gif" />
                         </div>
                        <script type="text/javascript"

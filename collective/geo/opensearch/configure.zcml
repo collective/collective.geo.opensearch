@@ -9,6 +9,8 @@
 
   <five:registerPackage package="." initialize=".initialize" />
 
+  <i18n:registerTranslations directory="locales" />
+
   <genericsetup:registerProfile
       name="default"
       title="collective.geo.opensearch"
@@ -19,8 +21,6 @@
   <!-- -*- extra stuff goes here -*- -->
 
   <include package=".browser" />
-
-  <!--i18n:registerTranslations directory="locales" /-->
 
 
 </configure>

@@ -1,8 +1,11 @@
 Changelog
 =========
+
 0.3.1 (2011/06/17)
 ------------------
 
+- added improvements about the Internationalization [macagua]
+- added support for Spanish localization for collective.geo.mapwidget domain [macagua]
 Bugfix release
 
 0.3 (2011/05/20)

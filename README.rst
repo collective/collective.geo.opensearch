@@ -129,5 +129,5 @@ Differences between RSS/Atom and KML Search Results
 The KML file will only return the content which is geo annotated. RSS and Atom feeds will return all content that matches the query with georss for the items which are geo annotated.
 
 
-- Code repository: http://svn.plone.org/svn/collective/collective.geo.opensearch/
-- Report bugs at http://plone.org/products/collective.geo.opensearch/issues
+- Code repository: https://github.com/collective/collective.geo.opensearch
+- Report bugs at https://github.com/collective/collective.geo.opensearch/issues

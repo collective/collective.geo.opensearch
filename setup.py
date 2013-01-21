@@ -6,12 +6,17 @@ version = '0.3.1'
 setup(name='collective.geo.opensearch',
       version=version,
       description="opensearch for plone maps (collective.geo)",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Framework :: Plone",
         "Programming Language :: Python",
+        "Framework :: Plone",
+        "Framework :: Plone :: 4.0",
+        "Framework :: Plone :: 4.1",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: GNU General Public License (GPL)",
+        "Topic :: Scientific/Engineering :: GIS",
         ],
       keywords='',
       author='Christian Ledermann',

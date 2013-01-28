@@ -7,10 +7,12 @@ Collective.geo.Opensearch builds on collective.geo (Plone Maps) and collective.o
 Produce Spatial Open Search Feeds
 ----------------------------------
 
-collective.geo.opensearch adds the possibility to add OpenSearch compatible search results to your Plone site.
+collective.geo.opensearch adds the possibility to add OpenSearch
+compatible search results to your Plone site.
 
 * site wide: this is a simple copy of the plone search so all option
 that you may pass to the standard /search will be recognized as well.
+
 * for a collection/topic: You can search inside a topic, i.e. you
 define a 'base query' as a topic and additional parameters of the query
 are applied additional.
@@ -68,8 +70,8 @@ Add a link content type that points to a remote (search) feed or KML.
 You have to choose 'Open Search Map View' manually for this link.
 
 georss feeds will be converted into a html search result and a kml
-map layer. kml sources will be passed on 'as is' (so be cautious
-of malicious html) and the name and description of the placemarks
+map layer. kml sources will be passed on 'as is' (the description
+is passed through htmllaundry) and the name and description of the placemarks
 displayed as search results.
 
 The view consits of a simple searchform, the map displaying the georss
@@ -126,7 +128,6 @@ Known limitations issues and caveats
 - Currently only the {searchTerms} paramter for full text search is recognized and supported
 - add '<match path="regex:^.*/opensearchresults.html*" abort="1" />' to your deliverance/xdv/diazo rules
 - internal searches as described in [5] will always be executed as 'anonymous'
-- No html sanitation for kml description
 - relative links in kml files will not be rewritten
 
 Differences between RSS/Atom and KML Search Results

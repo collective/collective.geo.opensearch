@@ -18,19 +18,31 @@ class FeedMapLayer(MapLayer):
         context_url = self.context.absolute_url()
         if not context_url.endswith('/'):
             context_url += '/'
-        context_url += '@@opensearch_link.kml?searchTerms=' + urllib.quote_plus(
+        query_string = 'searchTerms=' + urllib.quote_plus(
                 self.request.form.get('searchTerms',''))
-        return"""
-        function() { return new OpenLayers.Layer.GML('%s', '%s',
-            { format: OpenLayers.Format.KML,
-              projection: cgmap.createDefaultOptions().displayProjection,
-              formatOptions: {
-                  extractStyles: true,
-                  extractAttributes: true }
-            });}
-        """ % (self.context.Title().decode('utf-8', 'ignore'
-                                ).encode('ascii', 'xmlcharrefreplace'
-                                ).replace("'", "&apos;"), context_url)
+        return u"""function() {
+                return new OpenLayers.Layer.Vector("%s", {
+                    protocol: new OpenLayers.Protocol.HTTP({
+                      url: "%s@@opensearch_link.kml?%s",
+                      format: new OpenLayers.Format.KML({
+                        extractStyles: true,
+                        extractAttributes: true})
+                      }),
+                    strategies: [new OpenLayers.Strategy.Fixed()],
+                    visibility: true,
+                    /*eventListeners: { 'loadend': function(event) {
+                                 var extent = this.getDataExtent()
+                                 this.map.zoomToExtent(extent);
+                                }
+                            },*/
+                    projection: cgmap.createDefaultOptions().displayProjection
+                  });
+                } """ % (self.context.Title().replace("'", "&apos;"),
+                        context_url, query_string)
+
+
+
+
 class KMLMapLayers(MapLayers):
     '''
     create all layers for this view.

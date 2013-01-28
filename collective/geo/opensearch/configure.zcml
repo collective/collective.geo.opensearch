@@ -13,7 +13,7 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="collective.geo.opensearch"
+      title="Collective Geo OpenSearch"
       directory="profiles/default"
       description="Installs the collective.geo.opensearch package"
       provides="Products.GenericSetup.interfaces.EXTENSION"

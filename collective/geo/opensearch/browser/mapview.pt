@@ -13,7 +13,7 @@
         <div id="content-core" i18n:domain="plone">
                 <form name="opensearchform"
                       action="."
-                      class="searchPage"
+                      class="xsearchPage"
                       tal:condition="view/has_searchterm"
                       tal:attributes="action string:${here/absolute_url}/@@feed_map_view.html">
                     <input class="searchPage"

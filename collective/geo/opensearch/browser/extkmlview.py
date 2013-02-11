@@ -17,7 +17,10 @@ import urllib
 import feedparser
 import cgi
 import logging
-import shapely.geometry as geom
+try:
+	import shapely.geometry as geom
+except ImportError:
+	import pygeoif.geometry as geom
 from zope.interface import implements, Interface
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile

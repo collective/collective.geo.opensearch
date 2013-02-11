@@ -1,8 +1,10 @@
 #
 import logging
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-import shapely.geometry as geom
+try:
+	import shapely.geometry as geom
+except ImportError:
+	import pygeoif.geometry as geom
 
 logger = logging.getLogger('collective.geo.opensearch')
 

@@ -11,11 +11,11 @@ collective.geo.opensearch adds the possibility to add OpenSearch
 compatible search results to your Plone site.
 
 * site wide: this is a simple copy of the plone search so all option
-that you may pass to the standard /search will be recognized as well.
+  that you may pass to the standard /search will be recognized as well.
 
 * for a collection/topic: You can search inside a topic, i.e. you
-define a 'base query' as a topic and additional parameters of the query
-are applied additional.
+  define a 'base query' as a topic and additional parameters of the query
+  are applied additional.
 
 
 OpenSearch is a collection of simple formats for the sharing of search results.

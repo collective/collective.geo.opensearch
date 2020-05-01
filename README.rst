@@ -2,15 +2,15 @@ Introduction
 ============
 
 
-Collective.geo.Opensearch builds on collective.geo (Plone Maps) and collective.opensearch.
+``collective.geo.opensearch`` builds on `collective.geo`_ (Plone Maps) and `collective.opensearch`_.
 
 Produce Spatial Open Search Feeds
 ----------------------------------
 
-collective.geo.opensearch adds the possibility to add OpenSearch
+``collective.geo.opensearch`` adds the possibility to add OpenSearch
 compatible search results to your Plone site.
 
-* site wide: this is a simple copy of the plone search so all option
+* site wide: this is a simple copy of the Plone search so all option
   that you may pass to the standard /search will be recognized as well.
 
 * for a collection/topic: You can search inside a topic, i.e. you
@@ -31,7 +31,7 @@ can be used to extend existing syndication formats, such as RSS and
 Atom, with the extra metadata needed to return search results
 
 collective.geo.opensearch enables you to syndicate the search results
-of your plone site by formatting them in the RSS, Atom or KML formats,
+of your Plone site by formatting them in the RSS, Atom or KML formats,
 augmented with OpenSearch response elements.
 
 Implemented extensions and conventions
@@ -48,7 +48,7 @@ Implemented extensions and conventions
 Consume Open Search Feeds
 -------------------------
 
-collective.geo.opensearch adds a view to the link type that lets you
+``collective.geo.opensearch`` adds a view to the link type that lets you
 search OpenSearch (or other searches that return RSS or Atom, pretty
 much any other format feed parser supports and KML) compatible search
 providers within your site. The feeds do not need to implement
@@ -69,13 +69,13 @@ Usage:
 Add a link content type that points to a remote (search) feed or KML.
 You have to choose 'Open Search Map View' manually for this link.
 
-georss feeds will be converted into a html search result and a kml
-map layer. kml sources will be passed on 'as is' (the description
+georss feeds will be converted into a html search result and a KML
+map layer. KML sources will be passed on 'as is' (the description
 is passed through htmllaundry) and the name and description of the placemarks
 displayed as search results.
 
-The view consits of a simple searchform, the map displaying the georss
-or kml information and the results of the query
+The view consists of a simple search form, the map displaying the georss
+or KML information and the results of the query
 
 2) search multiple sources at once
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,13 +89,13 @@ the searches will be displayed as layers in the map and in tabs beneath
 the form. The queries are executed asynchronously via AJAX, so you do
 not have to wait until the last query has finished.
 
-Abusing collective.geo.opensearch to Display miscelaneous Feeds and KMLs
-------------------------------------------------------------------------
+Abusing collective.geo.opensearch to Display miscellaneous Feeds and KMLs
+-------------------------------------------------------------------------
 
-3) Display an abritary 'static' feed or a remote KML Files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3) Display an arbitrary 'static' feed or a remote KML Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Allthough the main focus of this product is to produce and display
+Although the main focus of this product is to produce and display
 search feeds you may use it to display any valid feed. If the url of the
 link you added does not contain the {searchTerm} parameter and 'Open Search Map View'
 (you have to select the view manually from the 'display' menu) is
@@ -118,14 +118,14 @@ displayed if at least one of the links inside the folder has a
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As opensearch results are added to all collections you may use it as a
-searchform to search inside your collections. if you use a relative
+search form to search inside your collections. if you use a relative
 link (e.g. /mycollection/SearchableText={searchTerms}) you have to
 choose 'Open Search Map View' manually to display the search results.
 
 Known limitations issues and caveats
 ------------------------------------
 
-- Currently only the {searchTerms} paramter for full text search is recognized and supported
+- Currently only the {searchTerms} parameter for full text search is recognized and supported
 - add '<match path="regex:^.*/opensearchresults.html*" abort="1" />' to your deliverance/xdv/diazo rules
 - internal searches as described in [5] will always be executed as 'anonymous'
 - relative links in kml files will not be rewritten
@@ -138,5 +138,60 @@ RSS and Atom feeds will return all content that matches the query with
 georss for the items which are geo annotated.
 
 
-- Code repository: https://github.com/collective/collective.geo.opensearch
-- Report bugs at https://github.com/collective/collective.geo.opensearch/issues
+Documentation
+=============
+
+Full documentation for end users can be found in the "docs" folder.
+It is also available online at https://collectivegeo.readthedocs.io/
+
+
+Translations
+============
+
+This product has been translated into
+
+- Spanish.
+
+You can contribute for any message missing or other new languages, join us at 
+`Plone Collective Team <https://www.transifex.com/plone/plone-collective/>`_ 
+into *Transifex.net* service with all world Plone translators community.
+
+
+Installation
+============
+
+This addon can be installed has any other addons, please follow official
+documentation_.
+
+
+Tests status
+============
+
+This add-on is tested using Travis CI. The current status of the add-on is:
+
+.. image:: https://img.shields.io/travis/collective/collective.geo.opensearch/master.svg
+    :target: https://travis-ci.org/collective/collective.geo.opensearch
+
+.. image:: http://img.shields.io/pypi/v/collective.geo.opensearch.svg
+   :target: https://pypi.org/project/collective.geo.opensearch
+
+
+Contribute
+==========
+
+Have an idea? Found a bug? Let us know by `opening a ticket`_.
+
+- Issue Tracker: https://github.com/collective/collective.geo.opensearch/issues
+- Source Code: https://github.com/collective/collective.geo.opensearch
+- Documentation: https://collectivegeo.readthedocs.io/
+
+
+License
+=======
+
+The project is licensed under the GPLv2.
+
+.. _collective.geo: https://pypi.org/project/collective.geo.bundle
+.. _collective.opensearch: https://pypi.org/project/collective.opensearch
+.. _`opening a ticket`: https://github.com/collective/collective.geo.bundle/issues
+.. _documentation: https://docs.plone.org/manage/installing/installing_addons.html

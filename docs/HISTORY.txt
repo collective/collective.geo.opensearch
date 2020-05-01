@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.5 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
 0.4 (2013/06/10)
 -----------------
 
@@ -14,10 +20,12 @@ Changelog
 - added support for Spanish localization for collective.geo.mapwidget domain [macagua]
 - Bugfix release
 
+
 0.3 (2011/05/20)
 ----------------
 
 - remove unused registerTranslations
+
 
 0.2 (2011/05/19)
 ----------------

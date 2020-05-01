@@ -1,0 +1,10 @@
+[main]
+host = https://www.transifex.com
+
+[plone-collective.collective-geo-opensearch-pot]
+file_filter = collective/geo/opensearch/locales/<lang>/LC_MESSAGES/collective.geo.opensearch.po
+minimum_perc = 0
+source_file = collective/geo/opensearch/locales/collective.geo.opensearch.pot
+source_lang = en
+type = PO
+

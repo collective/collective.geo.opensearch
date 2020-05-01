@@ -4,6 +4,7 @@ Changelog
 0.5 (unreleased)
 -----------------
 
+- Updated Spanish translation [macagua]
 - Updated i18n support [macagua]
 
 

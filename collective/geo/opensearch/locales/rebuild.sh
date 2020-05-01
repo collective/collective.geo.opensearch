@@ -2,7 +2,10 @@
 
 PRODUCT=collective.geo.opensearch
 
-i18ndude rebuild-pot --pot ../locales/${PRODUCT}.pot --exclude=`../browser/linestring.pt ../browser/kmlview.pt ../browser/polygon.pt ../browser/extkmlview.pt ../browser/atomview.pt ../browser/rssview.pt ../browser/point.pt ` --create $PRODUCT ../browser/folderview.pt
+i18ndude rebuild-pot \
+         --pot ../locales/${PRODUCT}.pot \
+         --exclude=`../browser/linestring.pt ../browser/kmlview.pt ../browser/polygon.pt ../browser/extkmlview.pt ../browser/atomview.pt ../browser/rssview.pt ../browser/point.pt ` \
+         --create $PRODUCT ../browser/folderview.pt ../configure.zcml
 i18ndude sync --pot ../locales/${PRODUCT}.pot ../locales/*/LC_MESSAGES/${PRODUCT}.po
 
 #for lang in $(find ../locales -mindepth 1 -maxdepth 1 -type d); do

@@ -3,8 +3,7 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="here/main_template/macros/master"
-      i18n:domain="collective.geo.opensearch">
+      metal:use-macro="here/main_template/macros/master">
 <head>
     <metal:javascript_head fill-slot="javascript_head_slot">
       <metal:use use-macro="context/@@collectivegeo-macros/openlayers" />
@@ -43,13 +42,13 @@
                    <dt tal:content="search/Title"
                         tal:attributes="id string:fieldsetlegend-${search/id}">
                         <tal:comment replace="nothing">Search title</tal:comment> </dt>
-                    <dd tal:attributes="id string:fieldset-${search/id}">
+                    <dd tal:attributes="id string:fieldset-${search/id}" i18n:domain="collective.geo.opensearch">
                        <div tal:content="search/Description"> <tal:comment replace="nothing">Description</tal:comment> </div>
                        <div id="searchresults"
-                        tal:attributes="id string:searchresults-${search/id}" i18n:translate="">
-                        Loading please wait.
+                            tal:attributes="id string:searchresults-${search/id}">
+                        <i18n:block i18n:translate="">Loading please wait.</i18n:block>
                         <img src="/spinner.gif" alt="loading" i18n:attributes="alt"
-                            tal:attributes="src string:${here/portal_url}/spinner.gif" />
+                             tal:attributes="src string:${here/portal_url}/spinner.gif" />
                         </div>
                        <script type="text/javascript"
                                 tal:content="structure python:view.get_js(search)">
